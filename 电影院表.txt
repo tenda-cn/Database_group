@@ -1,0 +1,1 @@
+create table Cinema(CID  char(10) primary key ,CAddress char(20), )

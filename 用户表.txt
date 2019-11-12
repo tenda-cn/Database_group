@@ -1,0 +1,9 @@
+create table User(
+ID  char(10) primary key ,
+Name char(10),
+Sex char(10),
+Bir char(10),
+Tel char(20)
+ )
+
+
