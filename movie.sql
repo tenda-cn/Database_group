@@ -3,9 +3,10 @@ create table Movie(
 	mID int primary key,
 	mname nvarchar(20),
 	movieLanguage nvarchar(10),
-	duration int,		--时长
+	duration nvarchar(20),		--时长
 	area nvarchar(20),
-	releaseTime datetime,
+	releaseTime date,
+	othername nvarchar(100),
 	content text,
 	price float
 )
@@ -14,7 +15,7 @@ create table Movie(
 create table Worker(
 	wid int primary key,
 	wcountry nvarchar(20),
-	wname nvarchar,
+	wname nvarchar(30),
 )
 
 --导演关系
@@ -61,3 +62,13 @@ create table mtag(
 	tag nvarchar(30),
 	constraint mtg_prim primary key(mID, tag)
 )
+
+drop table act
+drop table author
+drop table direct
+drop table Movie
+drop table mtag
+drop table mtype
+drop table tag
+drop table Typ
+drop table Worker
