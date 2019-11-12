@@ -1,1 +1,2 @@
-create table Cinema(CID  char(10) primary key ,CAddress char(20), )
+create table Theater(CID  int primary key ,
+tname varchar(20),tlocation varchar(20) )

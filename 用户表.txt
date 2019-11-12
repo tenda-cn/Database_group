@@ -1,9 +1,11 @@
-create table User(
-ID  char(10) primary key ,
-Name char(10),
-Sex char(10),
-Bir char(10),
-Tel char(20)
+create table DUser(
+ID  int primary key ,
+username varchar(10),
+pwd varchar(20)
+email varchar(20),
+gender varchar(3),
+Bir varchar(20),
+Tel varchar(20)
  )
 
 
