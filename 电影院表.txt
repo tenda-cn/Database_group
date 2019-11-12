@@ -1,0 +1,2 @@
+create table Theater(CID  int primary key ,
+tname varchar(20),tlocation varchar(20) )

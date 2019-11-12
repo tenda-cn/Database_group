@@ -1,0 +1,11 @@
+create table DUser(
+ID  int primary key ,
+username varchar(10),
+pwd varchar(20)
+email varchar(20),
+gender varchar(3),
+Bir varchar(20),
+Tel varchar(20)
+ )
+
+
