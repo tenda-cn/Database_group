@@ -1,5 +1,7 @@
 package test;
 
+import java.util.ArrayList;
+
 import dao.DAOFactory;
 import daoImpl.TypeDAOImpl;
 import entity.Type;
@@ -21,9 +23,17 @@ public class TypeDAOImplTest {
 		typeDAO.delete("Àà±ð");
 	}
 	
+	protected static void testGetType() {
+		ArrayList<Type> type = typeDAO.getTagByMID(1);
+		for(Type t : type) {
+			System.out.println(t.getTypename());
+		}
+	}
+	
 	public static void main(String[] args) {
 		// testInsert();
 		// testGet();
-		testDelete();
+		// testDelete();
+		testGetType();
 	}
 }

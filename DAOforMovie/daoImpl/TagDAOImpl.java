@@ -100,8 +100,38 @@ public class TagDAOImpl extends DAOBase implements TagDAO {
 
 	@Override
 	public ArrayList<Tag> getTagByMID(int mid) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "Select tag from mtag where mID = ?";
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		ArrayList<Tag> tag = null;
+		Tag t = null;
+		try { 
+			conn = getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, mid);
+			rs = statement.executeQuery();
+			tag = new ArrayList<Tag>();
+			while(rs.next()) {
+				t = new Tag();
+				t.setTag(rs.getString("tag"));
+				tag.add(t);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (statement != null)
+					statement.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return tag;
 	}
 
 }

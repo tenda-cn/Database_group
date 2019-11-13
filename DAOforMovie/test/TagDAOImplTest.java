@@ -1,5 +1,7 @@
 package test;
 
+import java.util.ArrayList;
+
 import dao.DAOFactory;
 import dao.TagDAO;
 import daoImpl.TagDAOImpl;
@@ -22,9 +24,17 @@ public class TagDAOImplTest {
 		tagDAO.delete("¾çÇé");
 	}
 	
+	protected static void testGetTag() {
+		ArrayList<Tag> tags = tagDAO.getTagByMID(1);
+		for(Tag tag : tags) {
+			System.out.println(tag.getTag());
+		}
+	}
+	
 	public static void main(String[] args) {
 		//testInsert();
 		//testGet();
-		testDelete();
+		//testDelete();
+		testGetTag();
 	}
 }
