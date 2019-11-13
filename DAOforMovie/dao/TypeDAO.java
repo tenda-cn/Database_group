@@ -8,5 +8,5 @@ public interface TypeDAO {
 	// public boolean update(Type type); // 只有一个属性怎么update
 	public boolean delete(String type);
 	public Type get(String type);
-	public ArrayList<Type> getTagByMID(int mid);
+	public ArrayList<Type> getTypeByMID(int mid);
 }

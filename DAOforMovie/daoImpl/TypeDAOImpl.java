@@ -100,7 +100,7 @@ public class TypeDAOImpl extends DAOBase implements TypeDAO {
 	}
 
 	@Override
-	public ArrayList<Type> getTagByMID(int mid) {
+	public ArrayList<Type> getTypeByMID(int mid) {
 		String sql = "Select * from mtype where mID = ?";
 		Connection conn = null;
 		PreparedStatement statement = null;

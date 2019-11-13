@@ -24,7 +24,7 @@ public class TypeDAOImplTest {
 	}
 	
 	protected static void testGetType() {
-		ArrayList<Type> type = typeDAO.getTagByMID(1);
+		ArrayList<Type> type = typeDAO.getTypeByMID(1);
 		for(Type t : type) {
 			System.out.println(t.getTypename());
 		}
