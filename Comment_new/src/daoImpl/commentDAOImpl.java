@@ -1,8 +1,8 @@
 package daoImpl;
 
 import dao.DAOBase;
-import dao.UserDAO;
-import entity.User;
+import dao.commentDAO;
+import entity.comment;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,22 +11,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAOImpl extends DAOBase implements UserDAO {
+import javax.xml.stream.events.Comment;
+
+public class commentDAOImpl extends DAOBase implements commentDAO {
     @Override
-    public boolean insertUser(User user) {
-        String sql="insert into user values(?,?,?,?,?,?,?)";
+    public boolean insertComment(comment comm) {
+        String sql="insert into user values(?,?,?,?,?)";
         PreparedStatement pstmt=null;
         Connection conn=null;
         try{
             conn=getConnection();
             pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1,user.getUid());
-            pstmt.setString(2,user.getUsername());
-            pstmt.setString(3,user.getEmail());
-            pstmt.setString(4,user.getPwd());
-            pstmt.setString(5,user.getTel());
-            pstmt.setString(6,user.getAddr());
-            pstmt.setString(7,user.getGender());
+            pstmt.setInt(1,comm.getCid());
+            pstmt.setString(2,comm.getC_time());
+            pstmt.setString(3,comm.getC_content());
+            pstmt.setString(4,comm.getC_facility());
+            pstmt.setInt(5,comm.getUseful());
             pstmt.executeUpdate();
             closeConnection(conn,pstmt,null);
             return true;
@@ -37,20 +37,18 @@ public class UserDAOImpl extends DAOBase implements UserDAO {
     }
 
     @Override
-    public boolean updateUser(User user) {
-        String sql="update user set gender=?,username=?,email=?,pwd=?,tel=?,addr=? where uid=?";
+    public boolean updateComment(comment comm) {
+        String sql="update comment set c_time=?,c_content=?,c_facility=?,useful_amount=? where cid=?";
         PreparedStatement pstmt=null;
         Connection conn=null;
         try{
             conn=getConnection();
             pstmt=conn.prepareStatement(sql);
-            pstmt.setString(7,user.getUid());
-            pstmt.setString(2,user.getUsername());
-            pstmt.setString(3,user.getEmail());
-            pstmt.setString(4,user.getPwd());
-            pstmt.setString(5,user.getTel());
-            pstmt.setString(6,user.getAddr());
-            pstmt.setString(1,user.getGender());
+            pstmt.setInt(5,comm.getCid());
+            pstmt.setString(1,comm.getC_time());
+            pstmt.setString(2,comm.getC_content());
+            pstmt.setString(3,comm.getC_facility());
+            pstmt.setInt(4,comm.getUseful());
             pstmt.executeUpdate();
             closeConnection(conn,pstmt,null);
             return true;
@@ -61,14 +59,14 @@ public class UserDAOImpl extends DAOBase implements UserDAO {
     }
 
     @Override
-    public boolean deleteUser(String uid) {
-        String sql="delete from user where uid=?";
+    public boolean deleteComment(int cid) {
+        String sql="delete from comment where cid=?";
         PreparedStatement pstmt=null;
         Connection conn=null;
         try{
             conn=getConnection();
             pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1,uid);
+            pstmt.setInt(1,cid);
             pstmt.executeUpdate();
             closeConnection(conn,pstmt,null);
             return true;
@@ -79,26 +77,24 @@ public class UserDAOImpl extends DAOBase implements UserDAO {
     }
 
     @Override
-    public User getUser(String uid) {
-        String sql="select * from user where uid=\'"+uid+"\'";
+    public comment getComment(int cid) {
+        String sql="select * from user where uid=\'"+cid+"\'";
         Statement stmt=null;
         Connection conn=null;
         try{
             conn=getConnection();
             stmt=conn.createStatement();
             ResultSet rs=stmt.executeQuery(sql);
-            User user=new User();
+            comment comm=new comment();
             while (rs.next()){
-                user.setUid(rs.getString("uid"));
-                user.setUsername(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setPwd(rs.getString("pwd"));
-                user.setTel(rs.getString("tel"));
-                user.setAddr(rs.getString("addr"));
-                user.setGender(rs.getString("gender"));
+                comm.setCid(rs.getInt(cid));
+                comm.setC_time(rs.getString("c_time"));
+                comm.setC_content(rs.getString("c_content"));
+                comm.setC_facility(rs.getString("c_facility"));
+                comm.setUseful(rs.getInt("useful_amount"));               
             }
             closeConnection(conn,(PreparedStatement) stmt,rs);
-            return user;
+            return comm;
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -106,29 +102,27 @@ public class UserDAOImpl extends DAOBase implements UserDAO {
     }
 
     @Override
-    public ArrayList<User> getUsers() {
+    public ArrayList<comment> getComment() {
         String sql="select * from user";
         Statement stmt=null;
         Connection conn=null;
-        ArrayList<User> users=new ArrayList<User>();
+        ArrayList<comment> comms=new ArrayList<comment>();
         try{
             conn=getConnection();
             stmt=conn.createStatement();
             ResultSet rs=stmt.executeQuery(sql);
             while (rs.next()){
-                User user=new User();
-                user.setUid(rs.getString("uid"));
-                user.setUsername(rs.getString("username"));
-                user.setEmail(rs.getString("email"));
-                user.setPwd(rs.getString("pwd"));
-                user.setTel(rs.getString("tel"));
-                user.setAddr(rs.getString("addr"));
-                user.setGender(rs.getString("gender"));
-                users.add(user);
+                comment comm=new comment();
+                comm.setCid(rs.getInt("cid"));
+                comm.setC_time(rs.getString("c_time"));
+                comm.setC_content(rs.getString("c_content"));
+                comm.setC_facility(rs.getString("c_facility"));
+                comm.setUseful(rs.getInt("useful_amount")); 
+                comms.add(comm);
             }
             closeConnection(conn,(PreparedStatement) stmt,rs);
 
-            return users;
+            return comms;
         }catch (Exception e){
             e.printStackTrace();
         }

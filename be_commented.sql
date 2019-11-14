@@ -1,0 +1,6 @@
+CREATE TABLE be_commented
+(
+mID int NOT NULL,
+cid int NOT NULL CONSTRAINT C_Fore1 FOREIGN KEY REFERENCES comment(cid),
+CONSTRAINT M_C_Prim PRIMARY KEY(mID,cid)
+)
