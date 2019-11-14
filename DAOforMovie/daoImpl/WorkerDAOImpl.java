@@ -129,23 +129,159 @@ public class WorkerDAOImpl extends DAOBase implements WorkerDAO {
 		}
 		return worker;
 	}
+	
+	private ArrayList<Integer> getDirector(int mid){
+		String sql = "Select wid from direct where mID = ?";
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		ArrayList<Integer> workers = null;
+		try { 
+			conn = getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, mid);
+			rs = statement.executeQuery();
+			workers = new ArrayList<Integer>();
+			while(rs.next()) {
+				workers.add(rs.getInt("wid"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (statement != null)
+					statement.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return workers;		
+	}
+	
+	private ArrayList<Worker> getByMID(ArrayList<Integer> workers, int mid){
+
+		String sql = "select * from Worker where wid = ?";
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		ArrayList<Worker> directors = null;
+		Worker director = null;
+		try { 
+			conn = getConnection();
+			statement = conn.prepareStatement(sql);
+			directors = new ArrayList<Worker>();
+			for(int wid : workers) {
+				statement.setInt(1, wid);
+				rs = statement.executeQuery();
+				while(rs.next()) {
+					director = new Worker();
+					director.setWid(rs.getInt("wid"));
+					director.setCountry(rs.getString("wcountry"));
+					director.setName(rs.getString("wname"));
+					directors.add(director);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (statement != null)
+					statement.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return directors;
+	}
 
 	@Override
 	public ArrayList<Worker> getDirectorByMID(int mid) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Integer> workers = getDirector(mid);
+		return getByMID(workers, mid);
+	}
+	
+	private ArrayList<Integer> getAuthor(int mid){
+		String sql = "Select wid from author where mID = ?";
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		ArrayList<Integer> author = null;
+		try { 
+			conn = getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, mid);
+			rs = statement.executeQuery();
+			author = new ArrayList<Integer>();
+			while(rs.next()) {
+				author.add(rs.getInt("wid"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (statement != null)
+					statement.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return author;
 	}
 
 	@Override
 	public ArrayList<Worker> getAuthorByMID(int mid) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Integer> worker = getAuthor(mid);
+		return getByMID(worker, mid);
 	}
 
+	private ArrayList<Integer> getActor(int mid){
+		String sql = "Select wid from act where mID = ?";
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		ArrayList<Integer> actor = null;
+		try { 
+			conn = getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, mid);
+			rs = statement.executeQuery();
+			actor = new ArrayList<Integer>();
+			while(rs.next()) {
+				actor.add(rs.getInt("wid"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (statement != null)
+					statement.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return actor;
+	}
+	
 	@Override
 	public ArrayList<Worker> getActorByMID(int mid) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Integer> workers = getActor(mid);
+		return getByMID(workers, mid);
 	}
 
 }

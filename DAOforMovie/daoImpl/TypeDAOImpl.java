@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import dao.DAOBase;
 import dao.TypeDAO;
+import entity.Tag;
 import entity.Type;
 
 public class TypeDAOImpl extends DAOBase implements TypeDAO {
@@ -99,9 +100,39 @@ public class TypeDAOImpl extends DAOBase implements TypeDAO {
 	}
 
 	@Override
-	public ArrayList<Type> getTagByMID(int mid) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Type> getTypeByMID(int mid) {
+		String sql = "Select * from mtype where mID = ?";
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		ArrayList<Type> type = null;
+		Type t = null;
+		try { 
+			conn = getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setInt(1, mid);
+			rs = statement.executeQuery();
+			type = new ArrayList<Type>();
+			while(rs.next()) {
+				t = new Type();
+				t.setTypename(rs.getString("typename"));
+				type.add(t);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (statement != null)
+					statement.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return type;
 	}
 	
 }
