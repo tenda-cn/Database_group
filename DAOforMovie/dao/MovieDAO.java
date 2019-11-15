@@ -7,5 +7,5 @@ public interface MovieDAO {
 	public boolean update(Movie movie);
 	public boolean delete(int mID);
 	public Movie get(int mID);
-	public ArrayList<Movie> getALL();
+	public ArrayList<Integer> getMIDByName(String name);
 }
