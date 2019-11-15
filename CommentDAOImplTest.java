@@ -18,7 +18,7 @@ public class CommentDAOImplTest {
 
     public void testInsertComment() throws Exception {
     //TODO: Test goes here...
-        boolean b=commDAO.insertComment(new comment(102,"2019-11-12","非常好的一部电影","手机",200,9.3,"看过"));
+        boolean b=commDAO.insertComment(new comment(1107,"2019-11-12","非常好的一部电影","phone",200,9.3,"看过"));
         
     }
 
@@ -29,7 +29,7 @@ public class CommentDAOImplTest {
     */
     public void testUpdateComment() throws Exception {
     //TODO: Test goes here...
-        boolean b=commDAO.updateComment(new comment(102,"2019-10-2","据说男主演得很棒","电脑",301,8.9,"没看过"));
+        boolean b=commDAO.updateComment(new comment(1108,"2019-10-2","据说男主演得很棒","computer",301,8.9,"没看过"));
      
     }
 
@@ -83,7 +83,7 @@ public class CommentDAOImplTest {
         list=cdi.getCommentByMID(mID1);
     	for(comment comm:list)
     	{
-    		System.out.println(comm.getC_time());//测试mID为189981电影对应的所有评价的评价时间
+    		System.out.println(comm.getC_time()+"		"+comm.getC_content());//测试mID为189981电影对应的所有评价的评价时间和评价内容
     	}
     }
     		
