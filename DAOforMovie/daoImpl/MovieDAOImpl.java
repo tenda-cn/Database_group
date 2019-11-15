@@ -126,7 +126,8 @@ public class MovieDAOImpl extends DAOBase implements MovieDAO {
 				movie.setMname(rs.getString("mname"));
 				movie.setMovieLanguage(rs.getString("movieLanguage"));
 				movie.setDuration(rs.getString("duration"));
-				movie.setArea(rs.getString("releaseTime"));
+				movie.setArea(rs.getString("area"));
+				movie.setReleaseTime(rs.getString("releaseTime"));
 				movie.setOtherName(rs.getString("othername"));
 				movie.setContent(rs.getString("content"));
 				movie.setPrice(rs.getDouble("price"));
@@ -150,8 +151,36 @@ public class MovieDAOImpl extends DAOBase implements MovieDAO {
 	}
 
 	@Override
-	public ArrayList<Movie> getALL() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Integer> getMIDByName(String name) {
+		String sql = "select * from Movie where mname like ?";
+		Connection conn = null;
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		ArrayList<Integer> mids = null;
+		try { 
+			conn = getConnection();
+			statement = conn.prepareStatement(sql);
+			statement.setString(1, "%" + name + "%");
+			mids = new ArrayList<Integer>();
+			rs = statement.executeQuery();
+			while(rs.next()) {
+				mids.add(rs.getInt("mID"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (statement != null)
+					statement.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return mids;
 	}
+
 }
