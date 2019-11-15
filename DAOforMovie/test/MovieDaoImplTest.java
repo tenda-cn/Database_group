@@ -87,12 +87,16 @@ public class MovieDaoImplTest {
 	}
 
 	public static void main(String[] args) {
-		MovieDAOImpl movieDAO = (MovieDAOImpl) DAOFactory.getMovieDAO();
-		Movie movie = movieDAO.get(1);
-		System.out.println(movie.getContent());
+		// 测get方法
+		//MovieDAOImpl movieDAO = (MovieDAOImpl) DAOFactory.getMovieDAO();
+		//Movie movie = movieDAO.get(1);
+		//System.out.println(movie.getContent());
+		
+		
 		//testInsert();
 		//testDelete();
 		
+		// 测update方法
 		//movie.setContent("content");
 		//movie.setPrice(39.99);
 		//movieDAO.update(movie);
