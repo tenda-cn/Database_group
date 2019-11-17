@@ -1,0 +1,3 @@
+boolean b=commDAO.insertComment(new comment(1107,"2019-11-12","非常好的一部电影","phone",200,9.3,"看过"));
+boolean b=commDAO.updateComment(new comment(1108,"2019-10-2","据说男主演得很棒","computer",301,8.9,"没看过"));
+
