@@ -1,0 +1,33 @@
+//自定义电影名，得到该电影对应的所有评价的属性
+public void testGetCommentByMID() throws Exception{
+    	int mID1=189981;
+    	commentDAOImpl cdi=new commentDAOImpl();
+    	ArrayList<comment> list=null;
+        list=cdi.getCommentByMID(mID1);得到所有的评价数组
+    	for(comment comm:list)//在此可设置获取comment的7个属性任意组合
+    	{
+    		System.out.println(comm.getC_time()+"		"+comm.getC_content());//测试mID为189981电影对应的所有评价的评价时间和评价内容
+    	}
+    }
+
+
+//指定评价ID进行删除，如删除102评价
+public void testDeleteComment() throws Exception {
+        boolean b=commDAO.deleteComment(102);
+
+
+
+//指定评价ID，更新评价信息
+public void testUpdateComment() throws Exception {
+    //TODO: Test goes here...
+        boolean b=commDAO.updateComment(new comment(1108,"2019-10-2","据说男主演得很棒","computer",301,8.9,"没看过"));
+     
+    }
+
+ 
+ //插入一条评价的同时，可以插入评价-电影对应的关系表
+public void testInsertComment() throws Exception { 
+    	comment comm1=new comment(1107,"2019-11-12","非常好的一部电影","phone",200,9.3,"看过");
+        boolean b=commDAO.insertComment(comm1);
+        boolean b1=commDAO.insertBe_Comment(comm1, 189981);
+    }
