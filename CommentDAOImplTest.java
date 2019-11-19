@@ -17,9 +17,10 @@ public class CommentDAOImplTest {
     commentDAO commDAO=DAOFactory.getCommentDAO();
 
     public void testInsertComment() throws Exception {
-    //TODO: Test goes here...
-        boolean b=commDAO.insertComment(new comment(1107,"2019-11-12","非常好的一部电影","phone",200,9.3,"看过"));
-        
+    //插入一条评价的同时，可以插入评价-电影对应的关系表
+    	comment comm1=new comment(1107,"2019-11-12","非常好的一部电影","phone",200,9.3,"看过");
+        boolean b=commDAO.insertComment(comm1);
+        boolean b1=commDAO.insertBe_Comment(comm1, 189981);
     }
 
     /**
