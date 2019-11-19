@@ -39,6 +39,24 @@ public class commentDAOImpl extends DAOBase implements commentDAO {
         return false;
     }
     
+    public boolean insertBe_Comment(comment comm,int mID) {
+        String sql="insert into be_commented values(?,?)";
+        PreparedStatement pstmt=null;
+        Connection conn=null;
+        try{
+            conn=getConnection();
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setInt(1,mID);
+            pstmt.setInt(2, comm.getCid());
+            pstmt.executeUpdate();
+            closeConnection(conn,pstmt,null);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
 
 
     @Override
