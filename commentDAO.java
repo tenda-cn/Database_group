@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface commentDAO {
     public boolean insertComment(comment comm);
+    public boolean insertBe_Comment(comment comm,int mID);
     public boolean updateComment(comment comm);
     public boolean deleteComment(int cid);
     public comment getComment(int cid);
