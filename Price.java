@@ -7,8 +7,8 @@ public class Price {
 	public int getPId() {
 		return PId;
 	}
-	public void setPId(int pId) {
-		PId = pId;
+	public void setPId(int pid) {
+		PId = pid;
 	}
 	public String getFestival() {
 		return festival;
